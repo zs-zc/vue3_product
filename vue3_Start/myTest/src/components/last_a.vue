@@ -1,15 +1,29 @@
 <template>
+  <div>
     <div>
-        last_a--{{ message }}
+      last_a--{{ message }}
+      Mouse position is at: {{ x }}, {{ y }}
     </div>
+
+  </div>
 </template>
 
-<script setup>
-import {inject} from "vue"
-const message = inject('last_message')
+<script>
+
+import {ref, inject } from 'vue'
+import { useMouse } from './mouse.js'
+
+
+export default {
+  setup() {
+    const message = inject('last_message')
+    const { x, y } = useMouse()
+    return { message,x, y  }
+  }
+}
 
 </script>
 
-<style>
+<style scoped>
 
 </style>

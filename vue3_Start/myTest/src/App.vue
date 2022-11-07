@@ -63,6 +63,7 @@ const publishedBooksMessage = computed(() => {
   return author.books.length > 0 ? 'Yes' : 'No'
 })
 const now = computed(() => Date.now())
+const show=ref(true)
 
 const firstName = ref('John')
 const lastName = ref('Doe')
@@ -175,6 +176,10 @@ const fullName = computed({
     <hr>
     <Test :title="propTitle" @changProp="changProp" class="test"></Test>
     <hr>
+    <button @click="show = !show">Toggle</button>
+    <Transition name="slide-fade">
+      <p v-show="show">hello</p>
+    </Transition>
   </div>
 </template>
 
@@ -193,5 +198,44 @@ const fullName = computed({
 
 .test {
   background-color: blueviolet;
+}
+
+.v-enter-active,
+.v-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.v-enter-from,
+.v-leave-to {
+  opacity: 0;
+}
+
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+
+/*
+  进入和离开动画可以使用不同
+  持续时间和速度曲线。
+*/
+.slide-fade-enter-active {
+  transition: all 0.3s ease-out;
+}
+
+.slide-fade-leave-active {
+  transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1);
+}
+
+.slide-fade-enter-from,
+.slide-fade-leave-to {
+  transform: translateX(20px);
+  opacity: 0;
 }
 </style>
